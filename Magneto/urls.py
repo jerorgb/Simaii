@@ -20,6 +20,7 @@ from Agent import views as AgentViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', AgentViews.Home),
+    path('', AgentViews.Login),
     path('about/', AgentViews.About),
+    path('home/', AgentViews.Home),
 ]

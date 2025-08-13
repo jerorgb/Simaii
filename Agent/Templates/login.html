@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+        .login-container input,
+        .login-container button {
+            width: 100%; /* mismo ancho para inputs y botón */
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border-radius: 10px;
+            font-size: 1rem;
+            box-sizing: border-box; /* asegura que el padding no rompa el ancho */
+        }
+        .login-container input {
+            border: 1px solid #ccc;
+        }
+        .login-container button {
+            background-color: #4facfe;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .login-container button:hover {
+            background-color: #00c6ff;
+        }
+        .login-container a {
+            display: block;
+            margin-top: 0.8rem;
+            font-size: 0.9rem;
+            color: #4facfe;
+            text-decoration: none;
+        }
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+        .divider {
+            margin: 1rem 0;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form action="home/" method="post">
+            {% csrf_token %}
+            <input type="text" name="usuario" placeholder="Usuario" required>
+            <input type="password" name="clave" placeholder="Contraseña" required>
+            <button type="submit">Entrar</button>
+        </form>
+        <a href="#">¿Olvidaste tu contraseña?</a>
+        
+        <div class="divider"></div>
+        
+        <p style="font-size: 0.9rem; color: #666;">¿No tienes cuenta?</p>
+        <a href="#">Crear una cuenta</a>
+    </div>
+</body>
+</html>
