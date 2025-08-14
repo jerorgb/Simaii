@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -28,12 +27,12 @@
         }
         .login-container input,
         .login-container button {
-            width: 100%; /* mismo ancho para inputs y botón */
+            width: 100%;
             padding: 0.8rem;
             margin: 0.5rem 0;
             border-radius: 10px;
             font-size: 1rem;
-            box-sizing: border-box; /* asegura que el padding no rompa el ancho */
+            box-sizing: border-box;
         }
         .login-container input {
             border: 1px solid #ccc;
@@ -54,6 +53,7 @@
             font-size: 0.9rem;
             color: #4facfe;
             text-decoration: none;
+            cursor: pointer;
         }
         .login-container a:hover {
             text-decoration: underline;
@@ -62,23 +62,93 @@
             margin: 1rem 0;
             border-top: 1px solid #ccc;
         }
+ 
+        /* Estilos del modal */
+        .modal {
+            display: none; /* Oculto por defecto */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: black;
+        }
     </style>
 </head>
 <body>
     <div class="login-container">
-        <h2>Iniciar Sesión</h2>
-        <form action="home/" method="post">
-            {% csrf_token %}
-            <input type="text" name="usuario" placeholder="Usuario" required>
-            <input type="password" name="clave" placeholder="Contraseña" required>
-            <button type="submit">Entrar</button>
-        </form>
-        <a href="#">¿Olvidaste tu contraseña?</a>
-        
-        <div class="divider"></div>
-        
-        <p style="font-size: 0.9rem; color: #666;">¿No tienes cuenta?</p>
-        <a href="#">Crear una cuenta</a>
+    <h2>Iniciar Sesión</h2>
+
+    <!-- Mostrar mensaje de error -->
+    {% if error %}
+        <div style="color: red; font-size: 0.9rem; margin-bottom: 1rem;">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form action="home/" method="post">
+        {% csrf_token %}
+        <input type="text" name="usuario" placeholder="Usuario" required>
+        <input type="password" name="clave" placeholder="Contraseña" required>
+        <button type="submit">Entrar</button>
+    </form>
+
+    <a id="forgot-link">¿Olvidaste tu contraseña?</a>
+   
+    <div class="divider"></div>
+   
+    <p style="font-size: 0.9rem; color: #666;">¿No tienes cuenta?</p>
+    <a href="registro/">Crear una cuenta</a>
+</div>
+
+ 
+    <!-- Modal para recuperar contraseña -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close">&times;</span>
+            <h3>Recuperar Contraseña</h3>
+            <p>Introduce tu correo para enviarte instrucciones:</p>
+            <input type="email" placeholder="Correo electrónico" required>
+            <button>Enviar</button>
+        </div>
     </div>
+ 
+    <script>
+        const modal = document.getElementById("modal");
+        const openLink = document.getElementById("forgot-link");
+        const closeBtn = document.getElementById("close");
+ 
+        openLink.onclick = function() {
+            modal.style.display = "block";
+        }
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
+ 

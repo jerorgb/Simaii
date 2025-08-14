@@ -1,0 +1,109 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .register-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+        }
+        .register-container h2 {
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+        .register-container input,
+        .register-container button {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border-radius: 10px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        .register-container input {
+            border: 1px solid #ccc;
+        }
+        .register-container button {
+            background-color: #4facfe;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .register-container button:hover {
+            background-color: #00c6ff;
+        }
+        .register-container a {
+            display: block;
+            margin-top: 0.8rem;
+            font-size: 0.9rem;
+            color: #4facfe;
+            text-decoration: none;
+        }
+        .register-container a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            background-color: #ffe6e6;
+            color: #cc0000;
+            padding: 0.5rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+        .success-message {
+            background-color: #e6ffea;
+            color: #006600;
+            padding: 0.5rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2>Crear Cuenta</h2>
+
+        <!-- Mostrar mensajes -->
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == "error" %}
+                    <div class="error-message">{{ message }}</div>
+                {% else %}
+                    <div class="success-message">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <form action="{% url 'registro' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="nombre" placeholder="Nombre completo" required>
+            <input type="text" name="usuario" placeholder="Usuario" required>
+            <input type="email" name="correo" placeholder="Correo electrónico" required>
+            <input type="password" name="clave" placeholder="Contraseña" required>
+            <input type="password" name="confirmar" placeholder="Confirmar contraseña" required>
+            <button type="submit">Registrarse</button>
+        </form>
+
+        <p style="font-size: 0.9rem; color: #666;">¿Ya tienes cuenta?</p>
+        <a href="{% url 'Login' %}">Iniciar sesión</a>
+    </div>
+</body>
+</html>
