@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -62,10 +63,14 @@
             margin: 1rem 0;
             border-top: 1px solid #ccc;
         }
- 
-        /* Estilos del modal */
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        /* Modal */
         .modal {
-            display: none; /* Oculto por defecto */
+            display: none;
             position: fixed;
             z-index: 1000;
             left: 0;
@@ -96,32 +101,29 @@
 </head>
 <body>
     <div class="login-container">
-    <h2>Iniciar Sesión</h2>
+        <h2>Iniciar Sesión</h2>
 
-    <!-- Mostrar mensaje de error -->
-    {% if error %}
-        <div style="color: red; font-size: 0.9rem; margin-bottom: 1rem;">
-            {{ error }}
-        </div>
-    {% endif %}
+        <!-- Mensaje de error -->
+        {% if error %}
+            <div class="error-message">{{ error }}</div>
+        {% endif %}
 
-    <form action="home/" method="post">
-        {% csrf_token %}
-        <input type="text" name="usuario" placeholder="Usuario" required>
-        <input type="password" name="clave" placeholder="Contraseña" required>
-        <button type="submit">Entrar</button>
-    </form>
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="text" name="usuario" placeholder="Usuario" required>
+            <input type="password" name="clave" placeholder="Contraseña" required>
+            <button type="submit">Entrar</button>
+        </form>
 
-    <a id="forgot-link">¿Olvidaste tu contraseña?</a>
-   
-    <div class="divider"></div>
-   
-    <p style="font-size: 0.9rem; color: #666;">¿No tienes cuenta?</p>
-    <a href="registro/">Crear una cuenta</a>
-</div>
+        <a id="forgot-link">¿Olvidaste tu contraseña?</a>
 
- 
-    <!-- Modal para recuperar contraseña -->
+        <div class="divider"></div>
+
+        <p style="font-size: 0.9rem; color: #666;">¿No tienes cuenta?</p>
+        <a href="registro/">Crear una cuenta</a>
+    </div>
+
+    <!-- Modal de recuperar contraseña -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close" id="close">&times;</span>
@@ -131,12 +133,12 @@
             <button>Enviar</button>
         </div>
     </div>
- 
+
     <script>
         const modal = document.getElementById("modal");
         const openLink = document.getElementById("forgot-link");
         const closeBtn = document.getElementById("close");
- 
+
         openLink.onclick = function() {
             modal.style.display = "block";
         }
@@ -151,4 +153,3 @@
     </script>
 </body>
 </html>
- 

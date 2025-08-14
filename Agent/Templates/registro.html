@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -13,20 +14,20 @@
             height: 100vh;
             margin: 0;
         }
-        .register-container {
+        .registro-container {
             background-color: white;
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            width: 350px;
+            width: 300px;
             text-align: center;
         }
-        .register-container h2 {
+        .registro-container h2 {
             margin-bottom: 1.5rem;
             color: #333;
         }
-        .register-container input,
-        .register-container button {
+        .registro-container input,
+        .registro-container button {
             width: 100%;
             padding: 0.8rem;
             margin: 0.5rem 0;
@@ -34,76 +35,58 @@
             font-size: 1rem;
             box-sizing: border-box;
         }
-        .register-container input {
+        .registro-container input {
             border: 1px solid #ccc;
         }
-        .register-container button {
+        .registro-container button {
             background-color: #4facfe;
             color: white;
             border: none;
             cursor: pointer;
             transition: 0.3s;
         }
-        .register-container button:hover {
+        .registro-container button:hover {
             background-color: #00c6ff;
         }
-        .register-container a {
+        .registro-container a {
             display: block;
             margin-top: 0.8rem;
             font-size: 0.9rem;
             color: #4facfe;
             text-decoration: none;
         }
-        .register-container a:hover {
+        .registro-container a:hover {
             text-decoration: underline;
         }
         .error-message {
-            background-color: #ffe6e6;
-            color: #cc0000;
-            padding: 0.5rem;
-            border-radius: 5px;
-            margin-bottom: 1rem;
+            color: red;
             font-size: 0.9rem;
-            text-align: left;
-        }
-        .success-message {
-            background-color: #e6ffea;
-            color: #006600;
-            padding: 0.5rem;
-            border-radius: 5px;
             margin-bottom: 1rem;
-            font-size: 0.9rem;
-            text-align: left;
         }
     </style>
 </head>
 <body>
-    <div class="register-container">
+    <div class="registro-container">
         <h2>Crear Cuenta</h2>
 
-        <!-- Mostrar mensajes -->
-        {% if messages %}
-            {% for message in messages %}
-                {% if message.tags == "error" %}
-                    <div class="error-message">{{ message }}</div>
-                {% else %}
-                    <div class="success-message">{{ message }}</div>
-                {% endif %}
-            {% endfor %}
+        <!-- Mostrar mensaje de error -->
+        {% if error %}
+            <div class="error-message">{{ error }}</div>
         {% endif %}
 
-        <form action="{% url 'registro' %}" method="post">
-            {% csrf_token %}
-            <input type="text" name="nombre" placeholder="Nombre completo" required>
-            <input type="text" name="usuario" placeholder="Usuario" required>
-            <input type="email" name="correo" placeholder="Correo electrónico" required>
-            <input type="password" name="clave" placeholder="Contraseña" required>
-            <input type="password" name="confirmar" placeholder="Confirmar contraseña" required>
-            <button type="submit">Registrarse</button>
-        </form>
+        <form action="" method="post">
+    {% csrf_token %}
+    <input type="text" name="usuario" placeholder="Usuario" required>
+    <input type="text" name="nombre" placeholder="Nombre" required>
+    <input type="text" name="apellido" placeholder="Apellido" required>
+    <input type="email" name="email" placeholder="Correo electrónico" required>
+    <input type="password" name="clave" placeholder="Contraseña" required>
+    <input type="password" name="confirmar_clave" placeholder="Confirmar contraseña" required>
+    <button type="submit">Registrarse</button>
+</form>
 
-        <p style="font-size: 0.9rem; color: #666;">¿Ya tienes cuenta?</p>
-        <a href="{% url 'Login' %}">Iniciar sesión</a>
+
+        <a href="{% url 'Login' %}">Volver al inicio de sesión</a>
     </div>
 </body>
 </html>
