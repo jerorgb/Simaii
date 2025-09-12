@@ -5,14 +5,14 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
 
-def Login(request):
+def login(request):
     error = None
     if request.method == "POST":
         usuario = request.POST.get("usuario")
         clave = request.POST.get("clave")
 
         # Verificar usuario y contraseña
-        user = authenticate(username=usuario, password=clave)
+        user = authenticate(request, username=usuario, password=clave)
 
         if user is not None:
             # Usuario registrado y contraseña correcta → redirige a home
@@ -29,11 +29,11 @@ def Login(request):
 
 
 # Página "About"
-def About(request):
+def about(request):
     return render(request, 'about.html')
 
 # Página de inicio (Home)
-def Home(request):
+def home(request):
     return render(request, 'home.html')
 
 # Página de registro
@@ -72,6 +72,7 @@ def registro(request):
 
     return render(request, "registro.html")
 
-
+def chat(request):
+    return render(request, 'chat.html')
 
 
